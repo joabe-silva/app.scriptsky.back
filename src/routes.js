@@ -5,11 +5,11 @@ const Init = require('../src/controller/Init');
 const entidadeController = require('./controller/entidadeController');
 
 //Cria todas as tabelas do banco de dados
-routes.get('/init-create-tables', Init.Init.createTables)
+routes.post('/init-create-tables', Init.Init.createTables)
 //Deleta todas as tabelas do banco de dados
-routes.get('/init-drop-tables', Init.Init.dropTables)
+routes.post('/init-drop-tables', Init.Init.dropTables)
 //Rotas comuns
-routes.get('/cadastro-entidade', entidadeController.entidadeController.cadastroEntidade)
+routes.post('/cadastro-funcionario', entidadeController.entidadeController.cadastroEntidadeFuncionario)
 routes.get('/lista-entidades', entidadeController.entidadeController.listaEntidades)
 
 /*
