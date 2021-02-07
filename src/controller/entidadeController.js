@@ -9,9 +9,21 @@ exports.entidadeController = {
 
     },
     async editarEntidade(req, res) {
+        
+        //Criando validação de campos que foram alterados na view e que devem ser alterados na base de dados
+        //const ret = await db.query("SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";");
+        //const nome = ret.rows[{ nome }]
+        
+        db.query("UPDATE entidade SET nome = '"+req.body.nome+"' WHERE cod_entidade = "+req.params.cod+";");
+        db.query("UPDATE entidade SET contato = '"+req.body.contato+"' WHERE cod_entidade = "+req.params.cod+";");
+        db.query("UPDATE entidade SET email = '"+req.body.email+"' WHERE cod_entidade = "+req.params.cod+";");
+        db.query("UPDATE entidade SET senha = '"+req.body.senha+"' WHERE cod_entidade = "+req.params.cod+";");
+        db.query("UPDATE entidade SET situacao = '"+req.body.situacao+"' WHERE cod_entidade = "+req.params.cod+";");
+        db.query("UPDATE entidade SET tipo = '"+req.body.tipo+"' WHERE cod_entidade = "+req.params.cod+";");
 
-        const ent = db.query("UPDATE entidade SET nome ='"+req.body.nome+"', SET contato ='"+req.body.contato+"', SET email = '"+req.body.email+"', SET senha = '"+req.body.senha+"', SET situacao = '"+req.body.situacao+"', SET tipo='"+req.body.tipo+"' WHERE cod_entidade = "+req.params.cod+");");
-        return res.json('Dados alterados com sucesso!');
+        //Retorna dados atualizados da entidade
+        var ret = await db.query("SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";");
+        return res.json(ret);
 
     },
     async entidade(req, res) {
