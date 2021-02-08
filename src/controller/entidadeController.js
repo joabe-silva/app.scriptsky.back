@@ -43,13 +43,13 @@ exports.entidadeController = {
     async entidade(req, res) {
 
         const ent = await db.query("SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";");
-        return res.json(ent);
+        return res.json(ent.rows);
 
     },
     async entidades(req, res) {
 
         const ent = await db.query("SELECT * FROM entidade");
-        return res.json(ent);
+        return res.json(ent.rows);
 
     }
   
