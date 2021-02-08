@@ -11,20 +11,34 @@ exports.entidadeController = {
     async editarEntidade(req, res) {
         
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de dados
-        //const ret = await db.query("SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";");
-        //const nome = ret.rows[{ nome }]
-        
-        db.query("UPDATE entidade SET nome = '"+req.body.nome+"' WHERE cod_entidade = "+req.params.cod+";");
-        db.query("UPDATE entidade SET contato = '"+req.body.contato+"' WHERE cod_entidade = "+req.params.cod+";");
-        db.query("UPDATE entidade SET email = '"+req.body.email+"' WHERE cod_entidade = "+req.params.cod+";");
-        db.query("UPDATE entidade SET senha = '"+req.body.senha+"' WHERE cod_entidade = "+req.params.cod+";");
-        db.query("UPDATE entidade SET situacao = '"+req.body.situacao+"' WHERE cod_entidade = "+req.params.cod+";");
-        db.query("UPDATE entidade SET tipo = '"+req.body.tipo+"' WHERE cod_entidade = "+req.params.cod+";");
-
-        //Retorna dados atualizados da entidade
         var ret = await db.query("SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";");
-        return res.json(ret);
-
+    
+        //Nome
+        if(ret.rows[0].nome.trim() !== req.body.nome.trim()) {
+            db.query("UPDATE entidade SET nome = '"+req.body.nome.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        }
+        //Contato
+        if(ret.rows[0].contato.trim() !== req.body.contato.trim()) {
+            db.query("UPDATE entidade SET contato = '"+req.body.contato.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        }
+        //Email
+        if(ret.rows[0].email.trim() !== req.body.email.trim()) {
+            db.query("UPDATE entidade SET email = '"+req.body.email.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        }
+        //Senha
+        if(ret.rows[0].senha.trim() !== req.body.senha.trim()) {
+            db.query("UPDATE entidade SET senha = '"+req.body.senha.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        }
+        //Situacao
+        if(ret.rows[0].situacao !== req.body.situacao) {
+            db.query("UPDATE entidade SET situacao = '"+req.body.situacao+"' WHERE cod_entidade = "+req.params.cod+";");
+        }
+        //Tipo
+        if(ret.rows[0].tipo !== req.body.tipo) {
+            db.query("UPDATE entidade SET tipo = '"+req.body.tipo+"' WHERE cod_entidade = "+req.params.cod+";");
+        }
+        
+        return res.json('Dados atualizados com sucesso!');
     },
     async entidade(req, res) {
 
