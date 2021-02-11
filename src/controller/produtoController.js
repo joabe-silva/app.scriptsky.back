@@ -1,13 +1,15 @@
 const db = require("../config/databases");
 
-exports.Entidade = {
+exports.Produto = {
   
-    async cadastroEntidade(req, res) {
+    async cadastroProduto(req, res) {
 
         const ent = db.query("INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+req.body.senha+"', '"+req.body.situacao+"', '"+req.body.tipo+"');");
         return res.json('Entidade cadastrada com sucesso!');
+        "INSERT INTO produto (imagem, titulo, descricao, preco, desconto, situacao) values ('999999999999.jpg', 'Bolo de Maisena', '35,99', );"
 
     },
+    /*
     async editarEntidade(req, res) {
         
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de dados
@@ -52,5 +54,6 @@ exports.Entidade = {
         return res.json(ent.rows);
 
     }
+    */
   
 };
