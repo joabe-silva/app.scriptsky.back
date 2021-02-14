@@ -4,56 +4,49 @@ exports.Produto = {
   
     async cadastroProduto(req, res) {
 
-        const ent = db.query("INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+req.body.senha+"', '"+req.body.situacao+"', '"+req.body.tipo+"');");
-        return res.json('Entidade cadastrada com sucesso!');
-        "INSERT INTO produto (imagem, titulo, descricao, preco, desconto, situacao) values ('999999999999.jpg', 'Bolo de Maisena', '35,99', );"
+        const prod = db.query("INSERT INTO produto (imagem, titulo, descricao, preco, desconto, situacao) values ('', '"+req.body.titulo+"', '"+req.body.descricao+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.situacao+"');");
+        return res.json('Produto cadastrado com sucesso!');
 
     },
-    /*
-    async editarEntidade(req, res) {
+    async editarProduto(req, res) {
         
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de dados
-        var ret = await db.query("SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";");
+        var ret = await db.query("SELECT * FROM produto WHERE cod_produto="+req.params.cod+";");
     
-        //Nome
-        if(ret.rows[0].nome.trim() !== req.body.nome.trim()) {
-            db.query("UPDATE entidade SET nome = '"+req.body.nome.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        //Titulo
+        if(ret.rows[0].titulo.trim() !== req.body.titulo.trim()) {
+            db.query("UPDATE produto SET titulo = '"+req.body.titulo.trim()+"' WHERE cod_produto = "+req.params.cod+";");
         }
-        //Contato
-        if(ret.rows[0].contato.trim() !== req.body.contato.trim()) {
-            db.query("UPDATE entidade SET contato = '"+req.body.contato.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        //Descricao
+        if(ret.rows[0].descricao.trim() !== req.body.descricao.trim()) {
+            db.query("UPDATE produto SET descricao = '"+req.body.descricao.trim()+"' WHERE cod_produto = "+req.params.cod+";");
         }
-        //Email
-        if(ret.rows[0].email.trim() !== req.body.email.trim()) {
-            db.query("UPDATE entidade SET email = '"+req.body.email.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        //Preco
+        if(ret.rows[0].preco !== req.body.preco) {
+            db.query("UPDATE produto SET preco = '"+req.body.preco+"' WHERE cod_produto = "+req.params.cod+";");
         }
-        //Senha
-        if(ret.rows[0].senha.trim() !== req.body.senha.trim()) {
-            db.query("UPDATE entidade SET senha = '"+req.body.senha.trim()+"' WHERE cod_entidade = "+req.params.cod+";");
+        //Desconto
+        if(ret.rows[0].desconto !== req.body.desconto) {
+            db.query("UPDATE produto SET desconto = '"+req.body.desconto+"' WHERE cod_produto = "+req.params.cod+";");
         }
         //Situacao
         if(ret.rows[0].situacao !== req.body.situacao) {
-            db.query("UPDATE entidade SET situacao = '"+req.body.situacao+"' WHERE cod_entidade = "+req.params.cod+";");
-        }
-        //Tipo
-        if(ret.rows[0].tipo !== req.body.tipo) {
-            db.query("UPDATE entidade SET tipo = '"+req.body.tipo+"' WHERE cod_entidade = "+req.params.cod+";");
+            db.query("UPDATE produto SET situacao = '"+req.body.situacao+"' WHERE cod_produto = "+req.params.cod+";");
         }
         
-        return res.json('Dados atualizados com sucesso!');
+        return res.json('Dados do produto atualizados com sucesso!');
     },
-    async entidade(req, res) {
+    async produto(req, res) {
 
-        const ent = await db.query("SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";");
-        return res.json(ent.rows);
+        const prod = await db.query("SELECT * FROM produto WHERE cod_produto="+req.params.cod+";");
+        return res.json(prod.rows);
 
     },
-    async entidades(req, res) {
+    async produtos(req, res) {
 
-        const ent = await db.query("SELECT * FROM entidade");
-        return res.json(ent.rows);
+        const prod = await db.query("SELECT * FROM produto ORDER BY titulo ASC");
+        return res.json(prod.rows);
 
     }
-    */
   
 };

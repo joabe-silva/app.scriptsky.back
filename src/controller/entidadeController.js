@@ -38,7 +38,7 @@ exports.Entidade = {
             db.query("UPDATE entidade SET tipo = '"+req.body.tipo+"' WHERE cod_entidade = "+req.params.cod+";");
         }
         
-        return res.json('Dados atualizados com sucesso!');
+        return res.json('Dados da entidade atualizados com sucesso!');
     },
     async entidade(req, res) {
 
@@ -48,7 +48,7 @@ exports.Entidade = {
     },
     async entidades(req, res) {
 
-        const ent = await db.query("SELECT * FROM entidade");
+        const ent = await db.query("SELECT * FROM entidade ORDER BY nome ASC");
         return res.json(ent.rows);
 
     }

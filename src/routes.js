@@ -18,6 +18,9 @@ routes.get('/entidades', entidadeController.Entidade.entidades)
 
 //Rotas Produto
 routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)
+routes.put('/editar-produto/:cod', produtoController.Produto.editarProduto)
+routes.get('/produto/:cod', produtoController.Produto.produto)
+routes.get('/produtos', produtoController.Produto.produtos)
 
 module.exports = routes;
 
