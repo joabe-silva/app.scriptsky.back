@@ -21,10 +21,9 @@ exports.Init = {
     },
     //Deleta todas as tebelas do sistema
     async dropTables(req, res) {
-        db.query(
-            //"DROP TABLE entidade, entidade_end, pedido, pedido_item, produto;" 
-            "DROP TABLE pedido, pedido_item, produto;"
-        );
+        
+        const drop = "DROP TABLE entidade, entidade_end, pedido, pedido_item, produto;" 
+        db.query(drop);
 
         return res.json('Tabelas excluidas com sucesso!');
     }
