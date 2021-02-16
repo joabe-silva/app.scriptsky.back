@@ -1,13 +1,14 @@
 const db = require("../config/databases");
 
 exports.Produto = {
-  
+    //Cadastra produto
     async cadastroProduto(req, res) {
 
         const prod = db.query("INSERT INTO produto (imagem, titulo, descricao, preco, desconto, situacao) values ('', '"+req.body.titulo+"', '"+req.body.descricao+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.situacao+"');");
         return res.json('Produto cadastrado com sucesso!');
 
     },
+    //Edita produto
     async editarProduto(req, res) {
         
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de dados

@@ -1,10 +1,11 @@
 const express = require('express');
 const routes = express.Router();
 
-const init = require('../src/controller/Init');
-const entidadeController = require('./controller/entidadeController');
+const init                       = require('./controller/Init');
+const entidadeController         = require('./controller/entidadeController');
 const entidadeEnderecoController = require('./controller/entidadeEnderecoController');
-const produtoController = require('./controller/produtoController');
+const pedidoController           = require('./controller/pedidoController');
+const produtoController          = require('./controller/produtoController');
 
 //Cria todas as tabelas do banco de dados
 routes.post('/init-create-tables', init.Init.createTables)
@@ -21,6 +22,9 @@ routes.get('/entidades', entidadeController.Entidade.entidades)
 routes.post('/cadastro-endereco-entidade', entidadeEnderecoController.EnderecoEntidade.cadastroEnderecoEntidade)
 routes.put('/editar-endereco-entidade/:cod', entidadeEnderecoController.EnderecoEntidade.editarEnderecoEntidade)
 routes.get('/endereco-entidade/:cod', entidadeEnderecoController.EnderecoEntidade.enderecoEntidade)
+
+//Rotas Pedido
+routes.post('/criar-pedido', pedidoController.Pedido.criarPedido)
 
 //Rotas Produto
 routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)

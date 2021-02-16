@@ -1,7 +1,7 @@
 const db = require("../config/databases");
 
 exports.Entidade = {
-  
+    //Cadastra entidade
     async cadastroEntidade(req, res) {
         
         const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+req.body.senha+"', '"+req.body.situacao+"', '"+req.body.tipo+"');"
@@ -10,6 +10,7 @@ exports.Entidade = {
         return res.json('Entidade cadastrada com sucesso!');
 
     },
+    //Edita entidade
     async editarEntidade(req, res) {
         
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de 
@@ -62,6 +63,7 @@ exports.Entidade = {
         return res.json('Dados da entidade atualizados com sucesso!');
         
     },
+    //Retorna uma entidade especifica
     async entidade(req, res) {
 
         const entidade = "SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";"
@@ -70,6 +72,7 @@ exports.Entidade = {
         return res.json(ent.rows);
 
     },
+    //Retorna todas as entidades
     async entidades(req, res) {
 
         const entidade = "SELECT * FROM entidade ORDER BY nome ASC"
