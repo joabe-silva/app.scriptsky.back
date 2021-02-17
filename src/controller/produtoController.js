@@ -34,15 +34,17 @@ exports.Produto = {
         if(ret.rows[0].situacao !== req.body.situacao) {
             db.query("UPDATE produto SET situacao = '"+req.body.situacao+"' WHERE cod_produto = "+req.params.cod+";");
         }
-        
         return res.json('Dados do produto atualizados com sucesso!');
+        
     },
+    //Retorna um Produto Especifico
     async produto(req, res) {
 
         const prod = await db.query("SELECT * FROM produto WHERE cod_produto="+req.params.cod+";");
         return res.json(prod.rows);
 
     },
+    //Retorna Todos os Pedidos
     async produtos(req, res) {
 
         const prod = await db.query("SELECT * FROM produto ORDER BY titulo ASC");

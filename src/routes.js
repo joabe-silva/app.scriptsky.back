@@ -25,6 +25,9 @@ routes.get('/endereco-entidade/:cod', entidadeEnderecoController.EnderecoEntidad
 
 //Rotas Pedido
 routes.post('/criar-pedido', pedidoController.Pedido.criarPedido)
+routes.put('/editar-pedido/:cod', pedidoController.Pedido.editarPedido)
+routes.get('/pedido/:cod', pedidoController.Pedido.pedido)
+routes.get('/pedidos', pedidoController.Pedido.pedidos)
 
 //Rotas Produto
 routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)

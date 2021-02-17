@@ -1,9 +1,9 @@
 const db = require("../config/databases");
 
-exports.Pedido = {
+exports.PedidoItem = {
     
     //Cria Pedido
-    async criarPedido(req, res) {
+    async criarPedidoItem (req, res) {
 
         const pedido = "INSERT INTO pedido (cod_entidade, valor_total, desconto, valor_liquido, situacao) values ('"+req.body.cod_entidade+"', '"+req.body.valor_total+"', '"+req.body.desconto+"', '"+req.body.valor_liquido+"', '"+req.body.situacao+"');"
         db.query(pedido);
