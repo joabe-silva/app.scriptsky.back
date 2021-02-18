@@ -28,6 +28,7 @@ routes.post('/criar-pedido', pedidoController.Pedido.criarPedido)
 routes.put('/editar-pedido/:cod', pedidoController.Pedido.editarPedido)
 routes.get('/pedido/:cod', pedidoController.Pedido.pedido)
 routes.get('/pedidos', pedidoController.Pedido.pedidos)
+routes.get('/pedidos-entidade/:cod', pedidoController.Pedido.pedidosEntidade)
 
 //Rotas Produto
 routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)

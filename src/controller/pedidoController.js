@@ -43,6 +43,15 @@ exports.Pedido = {
 
         return res.json(ped.rows);
 
+    },
+    //Retorna Todos os Pedidos de um Cliente Especifico
+    async pedidosEntidade(req, res) {
+
+        const pedido = "SELECT * FROM pedido WHERE cod_entidade="+req.params.cod+" ORDER BY data_criacao DESC"
+        const ped = await db.query(pedido);
+
+        return res.json(ped.rows);
+
     }
 
 };
