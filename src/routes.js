@@ -2,6 +2,7 @@ const express = require('express');
 const routes = express.Router();
 
 const init                       = require('./controller/Init');
+const parametroController        = require('./controller/parametroController');
 const entidadeController         = require('./controller/entidadeController');
 const entidadeEnderecoController = require('./controller/entidadeEnderecoController');
 const pedidoController           = require('./controller/pedidoController');
@@ -11,6 +12,10 @@ const produtoController          = require('./controller/produtoController');
 routes.post('/init-create-tables', init.Init.createTables)
 //Deleta todas as tabelas do banco de dados
 routes.post('/init-drop-tables', init.Init.dropTables)
+
+//Rotas Entidade
+routes.post('/cadastro-parameto', parametroController.Parametro.cadastroParametro)
+routes.put('/editar-parametro', parametroController.Parametro.editarParametro)
 
 //Rotas Entidade
 routes.post('/cadastro-entidade', entidadeController.Entidade.cadastroEntidade)
