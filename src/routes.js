@@ -13,8 +13,8 @@ routes.post('/init-create-tables', init.Init.createTables)
 //Deleta todas as tabelas do banco de dados
 routes.post('/init-drop-tables', init.Init.dropTables)
 
-//Rotas Entidade
-routes.post('/cadastro-parameto', parametroController.Parametro.cadastroParametro)
+//Rotas Parametro
+routes.post('/cadastro-parametro', parametroController.Parametro.cadastroParametro)
 routes.put('/editar-parametro', parametroController.Parametro.editarParametro)
 
 //Rotas Entidade
