@@ -4,13 +4,14 @@ exports.PedidoItem = {
     
     //Cria Pedido
     async criarPedidoItem (req, res) {
-
-        const pedido = "INSERT INTO pedido (cod_entidade, valor_total, desconto, valor_liquido, situacao) values ('"+req.body.cod_entidade+"', '"+req.body.valor_total+"', '"+req.body.desconto+"', '"+req.body.valor_liquido+"', '"+req.body.situacao+"');"
-        db.query(pedido);
+        
+        const pedido_item = "INSERT INTO pedido_item (cod_pedido, cod_produto, preco, desconto, quantidade, valor_total, valor_liquido, observacao) values ('"+req.body.cod_pedido+"', '"+req.body.cod_produto+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.quantidade+"', '"+req.body.valor_total+"', '"+req.body.valor_liquido+"', '"+req.body.observacao+"');"
+        db.query(pedido_item);
 
         return res.json('Pedido criado com sucesso!');
 
     },
+    /*
     //Edita Pedido
     async editarPedido(req, res) {
         
@@ -44,5 +45,6 @@ exports.PedidoItem = {
         return res.json(ped.rows);
 
     }
+    */
 
 };

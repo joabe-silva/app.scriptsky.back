@@ -6,6 +6,7 @@ const parametroController        = require('./controller/parametroController');
 const entidadeController         = require('./controller/entidadeController');
 const entidadeEnderecoController = require('./controller/entidadeEnderecoController');
 const pedidoController           = require('./controller/pedidoController');
+const pedidoItemController       = require('./controller/pedidoItemController');
 const produtoController          = require('./controller/produtoController');
 
 //Cria todas as tabelas do banco de dados
@@ -34,6 +35,9 @@ routes.put('/editar-pedido/:cod', pedidoController.Pedido.editarPedido)
 routes.get('/pedido/:cod', pedidoController.Pedido.pedido)
 routes.get('/pedidos', pedidoController.Pedido.pedidos)
 routes.get('/pedidos-entidade/:cod', pedidoController.Pedido.pedidosEntidade)
+
+//Rotas Pedido Item
+routes.post('/criar-pedido-item', pedidoItemController.PedidoItem.criarPedidoItem)
 
 //Rotas Produto
 routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)
