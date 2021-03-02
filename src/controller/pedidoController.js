@@ -8,7 +8,10 @@ exports.Pedido = {
         const pedido = "INSERT INTO pedido (cod_entidade, valor_total, desconto, valor_liquido, situacao) values ('"+req.body.cod_entidade+"', '"+req.body.valor_total+"', '"+req.body.desconto+"', '"+req.body.valor_liquido+"', '"+req.body.situacao+"');"
         db.query(pedido);
 
-        return res.json('Pedido criado com sucesso!');
+        const cons_pedido = "SELECT cod_pedido FROM pedido WHERE cod_entidade = '"+req.body.cod_entidade+"' ORDER BY cod_pedido DESC LIMIT 1"
+        const cod_pedido = await db.query(cons_pedido);
+
+        return res.json(cod_pedido.rows[0].cod_pedido);
 
     },
     //Edita Pedido
