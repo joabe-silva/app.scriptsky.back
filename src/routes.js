@@ -38,6 +38,7 @@ routes.get('/pedidos-entidade/:cod', pedidoController.Pedido.pedidosEntidade)
 
 //Rotas Pedido Item
 routes.post('/criar-pedido-item', pedidoItemController.PedidoItem.criarPedidoItem)
+routes.get('/pedido-itens/:cod', pedidoItemController.PedidoItem.pedidoItens)
 
 //Rotas Produto
 routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)
