@@ -4,7 +4,7 @@ exports.Produto = {
     //Cadastra produto
     async cadastroProduto(req, res) {
 
-        const prod = db.query("INSERT INTO produto (imagem, titulo, descricao, preco, desconto, situacao) values ('', '"+req.body.titulo+"', '"+req.body.descricao+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.situacao+"');");
+        const prod = db.query("INSERT INTO produto (cod_produto_grupo, imagem, titulo, descricao, preco, desconto, situacao) values ('"+req.body.cod_produto_grupo+"', '"+req.body.imagem+"', '"+req.body.titulo+"', '"+req.body.descricao+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.situacao+"');");
         return res.json('Produto cadastrado com sucesso!');
 
     },
@@ -13,7 +13,15 @@ exports.Produto = {
         
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de dados
         var ret = await db.query("SELECT * FROM produto WHERE cod_produto="+req.params.cod+";");
-    
+        
+        //Grupo
+        if(ret.rows[0].cod_produto_grupo !== req.body.cod_produto_grupo) {
+            db.query("UPDATE produto SET cod_produto_grupo = '"+req.body.cod_produto_grupo+"' WHERE cod_produto = "+req.params.cod+";");
+        }
+        //Imagem
+        if(ret.rows[0].imagem.trim() !== req.body.imagem.trim()) {
+            db.query("UPDATE produto SET imagem = '"+req.body.imagem.trim()+"' WHERE cod_produto = "+req.params.cod+";");
+        }
         //Titulo
         if(ret.rows[0].titulo.trim() !== req.body.titulo.trim()) {
             db.query("UPDATE produto SET titulo = '"+req.body.titulo.trim()+"' WHERE cod_produto = "+req.params.cod+";");

@@ -8,6 +8,7 @@ const entidadeEnderecoController = require('./controller/entidadeEnderecoControl
 const pedidoController           = require('./controller/pedidoController');
 const pedidoItemController       = require('./controller/pedidoItemController');
 const produtoController          = require('./controller/produtoController');
+const produtoGrupoController     = require('./controller/produtoGrupoController');
 
 //Cria todas as tabelas do banco de dados
 routes.post('/init-create-tables', init.Init.createTables)
@@ -45,6 +46,12 @@ routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)
 routes.put('/editar-produto/:cod', produtoController.Produto.editarProduto)
 routes.get('/produto/:cod', produtoController.Produto.produto)
 routes.get('/produtos', produtoController.Produto.produtos)
+
+//Rotas Produto Grupo
+routes.post('/cadastro-produto-grupo', produtoGrupoController.Grupo.cadastroProdutoGrupo)
+routes.put('/editar-produto-grupo/:cod', produtoGrupoController.Grupo.editarProdutoGrupo)
+routes.get('/grupo/:cod', produtoGrupoController.Grupo.grupo)
+routes.get('/grupos', produtoGrupoController.Grupo.grupos)
 
 module.exports = routes;
 
