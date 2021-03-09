@@ -1,16 +1,42 @@
 const db = require("../config/databases");
 const bcrypt = require('bcrypt');
 
-exports.Entidade = {
+exports.Login = {
     //Login
     async login(req, res) {
 
-        const usuario = "SELECT email, senha, situacao, tipo FROM entidade WHERE email="+req.body.email.trim()+";"
-        const usu = await db.query(usuario);
+        //Verifica se existe esse email na base de dados
+        const entidade = "SELECT email, senha, situacao, tipo FROM entidade WHERE email='"+req.body.email.trim()+"'"
+        const usuario = await db.query(entidade);
+        //var msg = 'Vazio'
 
-        if()
+        if(usuario) {
+            for(var prop in usuario) {
+                if(usuario.hasOwnProperty(prop)) {
+                    return 'Nao existe';
+                }      
+            }
 
-        return res.json('Entidade cadastrada com sucesso!');
+            return 'Existe';
+        }
+        
+
+        /*
+        //Verifica se o usuário esta ativo
+        if(usuario.rows[0].situacao == 0) {
+            //Verifica se a senha informada é igual a senha armazenada no banco de dados
+            if(bcrypt.compare(req.body.senha, usuario.rows[0].senha)){
+
+                msg = 'Login realizado com sucesso.'
+
+            } else {
+                msg = 'Senha incorreta.'
+            }
+        } else {
+            msg = 'Usuário inativo. Contacte o administrado.'
+        }
+        */
+        return res.json(usuario.rows);
 
     },
     //Logoff

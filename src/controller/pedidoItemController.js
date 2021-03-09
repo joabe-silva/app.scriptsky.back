@@ -8,7 +8,7 @@ exports.PedidoItem = {
         const pedido_item = "INSERT INTO pedido_item (cod_pedido, cod_produto, preco, desconto, quantidade, valor_total, valor_liquido, observacao) values ('"+req.body.cod_pedido+"', '"+req.body.cod_produto+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.quantidade+"', '"+req.body.valor_total+"', '"+req.body.valor_liquido+"', '"+req.body.observacao+"');"
         db.query(pedido_item);
 
-        return res.json('Pedido criado com sucesso!');
+        return res.json('Item inserido com sucesso!');
 
     },
     //Retorna todos os Itens do Pedido
