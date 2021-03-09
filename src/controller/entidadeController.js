@@ -1,10 +1,12 @@
 const db = require("../config/databases");
+const bcrypt = require('bcrypt');
 
 exports.Entidade = {
     //Cadastra entidade
     async cadastroEntidade(req, res) {
-        
-        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+req.body.senha+"', '"+req.body.situacao+"', '"+req.body.tipo+"');"
+
+        //Inserindo dados da entidade na base de dados
+        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+req.body.situacao+"', '"+req.body.tipo+"');"
         db.query(entidade);
 
         return res.json('Entidade cadastrada com sucesso!');
@@ -39,9 +41,9 @@ exports.Entidade = {
 
         }
         //Senha
-        if(ret.rows[0].senha.trim() !== req.body.senha.trim()) {
+        if(!bcrypt.compareSync(req.body.senha.trim(), ret.rows[0].senha.trim())) {
 
-            const entidade = "UPDATE entidade SET senha = '"+req.body.senha.trim()+"' WHERE cod_entidade = "+req.params.cod+";"
+            const entidade = "UPDATE entidade SET senha = '"+bcrypt.hashSync(req.body.senha, 8)+"' WHERE cod_entidade = "+req.params.cod+";"
             db.query(entidade);
 
         }
