@@ -5,38 +5,28 @@ exports.Login = {
     //Login
     async login(req, res) {
 
-        //Verifica se existe esse email na base de dados
-        const entidade = "SELECT email, senha, situacao, tipo FROM entidade WHERE email='"+req.body.email.trim()+"'"
+        const entidade = "SELECT * FROM entidade WHERE email='"+req.body.email.trim()+"'"
         const usuario = await db.query(entidade);
-        //var msg = 'Vazio'
 
-        if(usuario) {
-            for(var prop in usuario) {
-                if(usuario.hasOwnProperty(prop)) {
-                    return 'Nao existe';
-                }      
-            }
+        //Verifica se existe o email informado na base de dados
+        if(usuario.rows != "") {
+            //Verifica se o usuario esta ativo
+            if(usuario.rows[0].situacao == 0) {
 
-            return 'Existe';
-        }
-        
+                if(bcrypt.compareSync(req.body.senha.trim(), usuario.rows[0].senha.trim())) {
 
-        /*
-        //Verifica se o usuário esta ativo
-        if(usuario.rows[0].situacao == 0) {
-            //Verifica se a senha informada é igual a senha armazenada no banco de dados
-            if(bcrypt.compare(req.body.senha, usuario.rows[0].senha)){
+                    return res.json('Login realizado com sucesso!');
 
-                msg = 'Login realizado com sucesso.'
+                } else {
+                    return res.json('Senha incorreta!'); 
+                }
 
             } else {
-                msg = 'Senha incorreta.'
+                return res.json('Usuário inativo. Contate o administrador!');
             }
         } else {
-            msg = 'Usuário inativo. Contacte o administrado.'
+            return res.json('Usuario inexistente!');
         }
-        */
-        return res.json(usuario.rows);
 
     },
     //Logoff
