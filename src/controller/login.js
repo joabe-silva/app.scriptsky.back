@@ -39,4 +39,6 @@ exports.Login = {
         return res.json('Entidade cadastrada com sucesso!');
 
     }
+aaaa
+
 }
