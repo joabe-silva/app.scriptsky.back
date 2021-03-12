@@ -1,5 +1,10 @@
-const db = require("../config/databases");
+const db = require('../config/databases');
+
+//onst localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+
+const passport = require('passport');
+const session = require('express-session')
 
 exports.Login = {
     //Login
@@ -14,6 +19,10 @@ exports.Login = {
             if(usuario.rows[0].situacao == 0) {
 
                 if(bcrypt.compareSync(req.body.senha.trim(), usuario.rows[0].senha.trim())) {
+
+                    passport.serializeUser((usuario, done) => {
+                        done(null, usuario.rows[0].cod_entidade);
+                    })
 
                     return res.json('Login realizado com sucesso!');
 
@@ -39,6 +48,5 @@ exports.Login = {
         return res.json('Entidade cadastrada com sucesso!');
 
     }
-aaaa
 
 }

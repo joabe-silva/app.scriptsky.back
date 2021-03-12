@@ -1,4 +1,4 @@
-const db = require("../config/databases");
+const db = require('../config/databases');
 
 exports.Pedido = {
     
