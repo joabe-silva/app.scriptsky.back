@@ -1,16 +1,29 @@
-const db = require('../config/databases');
-
-//onst localStrategy = require('passport-local').Strategy;
+const db     = require('../config/databases');
 const bcrypt = require('bcrypt');
+const jwt    = require('jsonwebtoken');
+const SECRET = 'ScriptskyAGzzcso@1$';
 
-const passport = require('passport');
-const session = require('express-session')
+
 
 exports.Login = {
+    //Verifica token do usuario
+    async verificaJWT(req, res, next) {
+
+        const token = req.headers['x-access-token'];
+    
+        jwt.verify(token, SECRET, (error, decoded) => {
+    
+            if(error) return res.json('Token invalido!');
+            const cod_entidade = decoded.cod_entidade;
+    
+            next();
+        });
+    
+    },
     //Login
     async login(req, res) {
 
-        const entidade = "SELECT * FROM entidade WHERE email='"+req.body.email.trim()+"'"
+        const entidade = "SELECT * FROM entidade WHERE email='"+req.body.email.trim()+"'";
         const usuario = await db.query(entidade);
 
         //Verifica se existe o email informado na base de dados
@@ -20,11 +33,10 @@ exports.Login = {
 
                 if(bcrypt.compareSync(req.body.senha.trim(), usuario.rows[0].senha.trim())) {
 
-                    passport.serializeUser((usuario, done) => {
-                        done(null, usuario.rows[0].cod_entidade);
-                    })
-
-                    return res.json('Login realizado com sucesso!');
+                    //Gerando token de autenticacao com duracao de 2 minutos
+                    const token = jwt.sign({ cod_entidade: usuario.rows[0].cod_entidade }, SECRET, { expiresIn: 120 });
+                    //Retornando token para o front da aplicacao
+                    return res.json(token);
 
                 } else {
                     return res.json('Senha incorreta!'); 

@@ -1,15 +1,15 @@
 const express = require('express');
 const routes = express.Router();
 
-const login                      = require('./controller/login');
-const init                       = require('./controller/init');
-const parametroController        = require('./controller/parametroController');
-const entidadeController         = require('./controller/entidadeController');
-const entidadeEnderecoController = require('./controller/entidadeEnderecoController');
-const pedidoController           = require('./controller/pedidoController');
-const pedidoItemController       = require('./controller/pedidoItemController');
-const produtoController          = require('./controller/produtoController');
-const produtoGrupoController     = require('./controller/produtoGrupoController');
+const login            = require('./controller/login');
+const init             = require('./controller/init');
+const parametro        = require('./controller/parametro');
+const entidade         = require('./controller/entidade');
+const entidadeEndereco = require('./controller/entidadeEndereco');
+const pedido           = require('./controller/pedido');
+const pedidoItem       = require('./controller/pedidoItem');
+const produto          = require('./controller/produto');
+const produtoGrupo     = require('./controller/produtoGrupo');
 
 //Cria todas as tabelas do banco de dados
 routes.post('/init-create-tables', init.Init.createTables)
@@ -20,42 +20,42 @@ routes.post('/init-drop-tables', init.Init.dropTables)
 routes.post('/login', login.Login.login)
 
 //Rotas Parametro
-routes.post('/cadastro-parametro', parametroController.Parametro.cadastroParametro)
-routes.put('/editar-parametro', parametroController.Parametro.editarParametro)
+routes.post('/cadastro-parametro', login.Login.verificaJWT, parametro.Parametro.cadastroParametro)
+routes.put('/editar-parametro', parametro.Parametro.editarParametro)
 
 //Rotas Entidade
-routes.post('/cadastro-entidade', entidadeController.Entidade.cadastroEntidade)
-routes.put('/editar-entidade/:cod', entidadeController.Entidade.editarEntidade)
-routes.get('/entidade/:cod', entidadeController.Entidade.entidade)
-routes.get('/entidades', entidadeController.Entidade.entidades)
+routes.post('/cadastro-entidade', entidade.Entidade.cadastroEntidade)
+routes.put('/editar-entidade/:cod', entidade.Entidade.editarEntidade)
+routes.get('/entidade/:cod', entidade.Entidade.entidade)
+routes.get('/entidades', entidade.Entidade.entidades)
 
 //Rotas Endereco Entidade
-routes.post('/cadastro-endereco-entidade', entidadeEnderecoController.EnderecoEntidade.cadastroEnderecoEntidade)
-routes.put('/editar-endereco-entidade/:cod', entidadeEnderecoController.EnderecoEntidade.editarEnderecoEntidade)
-routes.get('/endereco-entidade/:cod', entidadeEnderecoController.EnderecoEntidade.enderecoEntidade)
+routes.post('/cadastro-endereco-entidade', entidadeEndereco.EnderecoEntidade.cadastroEnderecoEntidade)
+routes.put('/editar-endereco-entidade/:cod', entidadeEndereco.EnderecoEntidade.editarEnderecoEntidade)
+routes.get('/endereco-entidade/:cod', entidadeEndereco.EnderecoEntidade.enderecoEntidade)
 
 //Rotas Pedido
-routes.post('/criar-pedido', pedidoController.Pedido.criarPedido)
-routes.put('/editar-pedido/:cod', pedidoController.Pedido.editarPedido)
-routes.get('/pedido/:cod', pedidoController.Pedido.pedido)
-routes.get('/pedidos', pedidoController.Pedido.pedidos)
-routes.get('/pedidos-entidade/:cod', pedidoController.Pedido.pedidosEntidade)
+routes.post('/criar-pedido', pedido.Pedido.criarPedido)
+routes.put('/editar-pedido/:cod', pedido.Pedido.editarPedido)
+routes.get('/pedido/:cod', pedido.Pedido.pedido)
+routes.get('/pedidos', pedido.Pedido.pedidos)
+routes.get('/pedidos-entidade/:cod', pedido.Pedido.pedidosEntidade)
 
 //Rotas Pedido Item
-routes.post('/criar-pedido-item', pedidoItemController.PedidoItem.criarPedidoItem)
-routes.get('/pedido-itens/:cod', pedidoItemController.PedidoItem.pedidoItens)
+routes.post('/criar-pedido-item', pedidoItem.PedidoItem.criarPedidoItem)
+routes.get('/pedido-itens/:cod', pedidoItem.PedidoItem.pedidoItens)
 
 //Rotas Produto
-routes.post('/cadastro-produto', produtoController.Produto.cadastroProduto)
-routes.put('/editar-produto/:cod', produtoController.Produto.editarProduto)
-routes.get('/produto/:cod', produtoController.Produto.produto)
-routes.get('/produtos', produtoController.Produto.produtos)
+routes.post('/cadastro-produto', produto.Produto.cadastroProduto)
+routes.put('/editar-produto/:cod', produto.Produto.editarProduto)
+routes.get('/produto/:cod', produto.Produto.produto)
+routes.get('/produtos', produto.Produto.produtos)
 
 //Rotas Produto Grupo
-routes.post('/cadastro-produto-grupo', produtoGrupoController.Grupo.cadastroProdutoGrupo)
-routes.put('/editar-produto-grupo/:cod', produtoGrupoController.Grupo.editarProdutoGrupo)
-routes.get('/grupo/:cod', produtoGrupoController.Grupo.grupo)
-routes.get('/grupos', produtoGrupoController.Grupo.grupos)
+routes.post('/cadastro-produto-grupo', produtoGrupo.Grupo.cadastroProdutoGrupo)
+routes.put('/editar-produto-grupo/:cod', produtoGrupo.Grupo.editarProdutoGrupo)
+routes.get('/grupo/:cod', produtoGrupo.Grupo.grupo)
+routes.get('/grupos', produtoGrupo.Grupo.grupos)
 
 module.exports = routes;
 
