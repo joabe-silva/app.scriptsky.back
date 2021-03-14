@@ -15,7 +15,6 @@ exports.Init = {
         const produto_grupo = "CREATE TABLE produto_grupo (cod_produto_grupo serial not null, descricao character(80))"
 
         db.query(blacklist);     //Cria tabela blacklist
-        /*
         db.query(parametro);     //Cria tabela parametros
         db.query(entidade);      //Cria tabela entidade
         db.query(entidade_end);  //Cria tabela entidade_end
@@ -23,7 +22,6 @@ exports.Init = {
         db.query(pedido_item);   //Cria tabela pedido_item
         db.query(produto);       //Cria tabela produto
         db.query(produto_grupo); //Cria tabela produto_grupo
-        */
 
         return res.json('Tabelas criadas com sucesso!');
 

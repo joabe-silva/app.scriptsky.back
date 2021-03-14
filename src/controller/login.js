@@ -2,8 +2,6 @@ const db     = require('../config/databases');
 const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken');
 const SECRET = 'ScriptskyAGzzcso@1$';
-const blacklist = [];
-
 
 exports.Login = {
     //Verifica token do usuario
