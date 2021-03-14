@@ -2,7 +2,7 @@ const db     = require('../config/databases');
 const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken');
 const SECRET = 'ScriptskyAGzzcso@1$';
-
+const blacklist = [];
 
 
 exports.Login = {
@@ -10,15 +10,24 @@ exports.Login = {
     async verificaJWT(req, res, next) {
 
         const token = req.headers['x-access-token'];
-    
-        jwt.verify(token, SECRET, (error, decoded) => {
-    
-            if(error) return res.json('Token invalido!');
-            const cod_entidade = decoded.cod_entidade;
-    
-            next();
-        });
-    
+
+        const blacklist = "SELECT * FROM blacklist WHERE token='"+token+"'";
+        const ret_blacklist = await db.query(blacklist);
+
+        //Verifica se o token foi inserido na blacklist. Ou seja o usuario fez logoff utilizando esse token.
+        if(ret_blacklist.rows == "") {
+            //Verifica se o token ainda esta ativo
+            jwt.verify(token, SECRET, (error, decoded) => {
+        
+                if(error) return res.json('Token invalido! Favor fazer login novamente.');
+                const cod_entidade = decoded.cod_entidade;
+        
+                next();
+            });
+        } else {
+            res.json('Sua sessão inspirou! Favor fazer login novamente.');
+        }
+
     },
     //Login
     async login(req, res) {
@@ -53,11 +62,11 @@ exports.Login = {
     //Logoff
     async logoff(req, res) {
 
-        //Inserindo dados da entidade na base de dados
-        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+req.body.situacao+"', '"+req.body.tipo+"');"
-        db.query(entidade);
+        //Inserindo token na blacklist
+        const blacklist = "INSERT INTO blacklist(token) values ('"+req.headers['x-access-token']+"');"
+        db.query(blacklist);
 
-        return res.json('Entidade cadastrada com sucesso!');
+        return res.end();
 
     }
 

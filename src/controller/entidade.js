@@ -2,8 +2,18 @@ const db = require('../config/databases');
 const bcrypt = require('bcrypt');
 
 exports.Entidade = {
-    //Cadastra entidade
-    async cadastroEntidade(req, res) {
+    //Cadastra entidade funcionario
+    async cadastroEntidadeCliente(req, res) {
+
+        //Inserindo dados da entidade na base de dados
+        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+req.body.situacao+"', '"+0+"');"
+        db.query(entidade);
+
+        return res.json('Cadastro realizado com sucesso!');
+
+    },
+    //Cadastra entidade funcionario
+    async cadastroEntidadeFuncionario(req, res) {
 
         //Inserindo dados da entidade na base de dados
         const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+req.body.situacao+"', '"+req.body.tipo+"');"

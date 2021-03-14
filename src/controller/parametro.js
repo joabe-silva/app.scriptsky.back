@@ -94,5 +94,12 @@ exports.Parametro = {
         return res.json('Parametros atualizados com sucesso!');
 
     },
+    //Retorna todos os Parametros
+    async parametro(req, res) {
+
+        const parametro = await db.query("SELECT * FROM parametro");
+        return res.json(parametro.rows)
+
+    }
 
 };
