@@ -1,7 +1,7 @@
 const db     = require('../config/databases');
 const bcrypt = require('bcrypt');
 const jwt    = require('jsonwebtoken');
-const SECRET = 'ScriptskyAGzzcso@1$';
+require('dotenv').config();
 
 exports.Login = {
     //Verifica token do usuario
@@ -15,7 +15,7 @@ exports.Login = {
         //Verifica se o token foi inserido na blacklist. Ou seja o usuario fez logoff utilizando esse token.
         if(ret_blacklist.rows == "") {
             //Verifica se o token ainda esta ativo
-            jwt.verify(token, SECRET, (error, decoded) => {
+            jwt.verify(token, process.env.SECRET, (error, decoded) => {
         
                 if(error) return res.json('Token invalido! Favor fazer login novamente.');
                 const cod_entidade = decoded.cod_entidade;
