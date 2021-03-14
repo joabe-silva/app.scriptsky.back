@@ -2,24 +2,44 @@ const db = require('../config/databases');
 const bcrypt = require('bcrypt');
 
 exports.Entidade = {
-    //Cadastra entidade funcionario
+    //Cadastra entidade cliente
     async cadastroEntidadeCliente(req, res) {
 
-        //Inserindo dados da entidade na base de dados
-        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+0+"', '"+0+"');"
-        db.query(entidade);
+        const email = "SELECT * FROM entidade WHERE email='"+req.body.email+"';"
+        const ret_email = await db.query(email);
+    
+        //Verifica se o email informado ja esta cadastrado na base de dados
+        if(ret_email.rows == "") {
 
-        return res.json('Cadastro realizado com sucesso!');
+            //Inserindo dados da entidade na base de dados
+            const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+0+"', '"+0+"');"
+            db.query(entidade);
+
+            return res.json('Cadastro realizado com sucesso!');
+
+        } else {
+            res.json('Email inserido já esta em uso por outro usuário. Favor insira um email diferente.');
+        }
 
     },
     //Cadastra entidade funcionario
     async cadastroEntidadeFuncionario(req, res) {
 
-        //Inserindo dados da entidade na base de dados
-        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+req.body.situacao+"', '"+req.body.tipo+"');"
-        db.query(entidade);
+        const email = "SELECT * FROM entidade WHERE email='"+req.body.email+"';"
+        const ret_email = await db.query(email);
+    
+        //Verifica se o email informado ja esta cadastrado na base de dados
+        if(ret_email.rows == "") {
 
-        return res.json('Entidade cadastrada com sucesso!');
+            //Inserindo dados da entidade na base de dados
+            const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+req.body.situacao+"', '"+req.body.tipo+"');"
+            db.query(entidade);
+
+            return res.json('Entidade cadastrada com sucesso!');
+
+        } else {
+            res.json('Email inserido já esta em uso por outro usuário. Favor insira um email diferente.');
+        }
 
     },
     //Edita entidade
