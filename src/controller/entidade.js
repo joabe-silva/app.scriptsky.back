@@ -6,7 +6,7 @@ exports.Entidade = {
     async cadastroEntidadeCliente(req, res) {
 
         //Inserindo dados da entidade na base de dados
-        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+req.body.situacao+"', '"+0+"');"
+        const entidade = "INSERT INTO entidade(nome, contato, email, senha, situacao, tipo) values ('"+req.body.nome+"', '"+req.body.contato+"', '"+req.body.email+"', '"+bcrypt.hashSync(req.body.senha, 8)+"', '"+0+"', '"+0+"');"
         db.query(entidade);
 
         return res.json('Cadastro realizado com sucesso!');
