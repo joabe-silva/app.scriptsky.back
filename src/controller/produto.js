@@ -56,7 +56,7 @@ exports.Produto = {
     async produtos(req, res) {
 
         const prod = await db.query("SELECT * FROM produto ORDER BY titulo ASC");
-        return res.json(prod.rows);
+        return res.json(prod);
 
     }
   

@@ -40,8 +40,8 @@ exports.Login = {
 
                 if(bcrypt.compareSync(req.body.senha.trim(), usuario.rows[0].senha.trim())) {
 
-                    //Gerando token de autenticacao com duracao de 2 minutos
-                    const token = jwt.sign({ cod_entidade: usuario.rows[0].cod_entidade }, SECRET, { expiresIn: 120 });
+                    //Gerando token de autenticacao com duracao de 10 minutos
+                    const token = jwt.sign({ cod_entidade: usuario.rows[0].cod_entidade }, process.env.SECRET, { expiresIn: 600 });
                     //Retornando token para o front da aplicacao
                     return res.json(token);
 
