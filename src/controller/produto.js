@@ -4,7 +4,7 @@ exports.Produto = {
     //Cadastra produto
     async cadastroProduto(req, res) {
 
-        const prod = db.query("INSERT INTO produto (cod_produto_grupo, imagem, titulo, descricao, preco, desconto, situacao) values ('"+req.body.cod_produto_grupo+"', '"+req.body.imagem+"', '"+req.body.titulo+"', '"+req.body.descricao+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.situacao+"');");
+        const prod = db.query("INSERT INTO produto (cod_produto_grupo, imagem, titulo, descricao, preco, desconto, situacao) values ('"+req.body.cod_produto_grupo+"', '"+req.body.imagem.trim()+"', '"+req.body.titulo.trim()+"', '"+req.body.descricao.trim()+"', '"+req.body.preco+"', '"+req.body.desconto+"', '"+req.body.situacao+"');");
         return res.json('Produto cadastrado com sucesso!');
 
     },
@@ -48,14 +48,15 @@ exports.Produto = {
     //Retorna um Produto Especifico
     async produto(req, res) {
 
-        const prod = await db.query("SELECT * FROM produto WHERE cod_produto="+req.params.cod+";");
+        const prod = await db.query("SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco FROM produto WHERE situacao = 0 AND cod_produto="+req.params.cod+" ORDER BY titulo ASC");
+        //const prod = await db.query("SELECT * FROM produto WHERE cod_produto="+req.params.cod+";");
         return res.json(prod.rows);
 
     },
     //Retorna Todos os Pedidos
     async produtos(req, res) {
 
-        const prod = await db.query("SELECT * FROM produto ORDER BY titulo ASC");
+        const prod = await db.query("SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco FROM produto WHERE situacao = 0 ORDER BY titulo ASC");
         return res.json(prod);
 
     }
