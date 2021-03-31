@@ -1,15 +1,16 @@
 const express = require('express');
 const routes = express.Router();
 
-const login            = require('./controller/login');
-const init             = require('./controller/init');
-const parametro        = require('./controller/parametro');
-const entidade         = require('./controller/entidade');
-const entidadeEndereco = require('./controller/entidadeEndereco');
-const pedido           = require('./controller/pedido');
-const pedidoItem       = require('./controller/pedidoItem');
-const produto          = require('./controller/produto');
-const produtoGrupo     = require('./controller/produtoGrupo');
+const login                     = require('./controller/login');
+const init                      = require('./controller/init');
+const parametro                 = require('./controller/parametro');
+const parametro_forma_pagamento = require('./controller/parametro_forma_pagamento');
+const entidade                  = require('./controller/entidade');
+const entidadeEndereco          = require('./controller/entidadeEndereco');
+const pedido                    = require('./controller/pedido');
+const pedidoItem                = require('./controller/pedidoItem');
+const produto                   = require('./controller/produto');
+const produtoGrupo              = require('./controller/produtoGrupo');
 
 //Cria todas as tabelas do banco de dados
 routes.post('/init-create-tables', init.Init.createTables)
@@ -25,6 +26,11 @@ routes.post('/logoff', login.Login.logoff)
 routes.post('/cadastro-parametro', login.Login.verificaJWT, parametro.Parametro.cadastroParametro)
 routes.put('/editar-parametro', login.Login.verificaJWT, parametro.Parametro.editarParametro)
 routes.get('/parametro', login.Login.verificaJWT, parametro.Parametro.parametro)
+
+//Rotas Parametro Forma Pagamento
+routes.post('/cadastro-parametro-forma-pagamento', login.Login.verificaJWT, parametro_forma_pagamento.ParametroFormaPagamento.cadastroParametroFormaPagamento)
+routes.put('/editar-parametro-forma-pagamento', login.Login.verificaJWT, parametro_forma_pagamento.ParametroFormaPagamento.editarParametroFormaPagamento)
+routes.get('/parametro-formas-pagamento', parametro_forma_pagamento.ParametroFormaPagamento.parametroFormasPagamento)
 
 //Rotas Entidade
 routes.post('/cadastro-entidade-cliente', entidade.Entidade.cadastroEntidadeCliente)
