@@ -20,11 +20,11 @@ exports.ParametroFormaPagamento = {
 
         //Descricao
         if(ret.rows[0].descricao.trim() !== req.body.descricao.trim()) {
-            db.query("UPDATE parametro_forma_pagamento SET descricao = '"+req.body.descricao.trim()+"'");
+            db.query("UPDATE parametro_forma_pagamento SET descricao = '"+req.body.descricao.trim()+"'"+" WHERE cod_parametro_forma_pagamento="+req.params.cod+";");
         }
         //Status
         if(ret.rows[0].status !== req.body.status) {
-            db.query("UPDATE parametro_forma_pagamento SET status = '"+req.body.status+"'");
+            db.query("UPDATE parametro_forma_pagamento SET status = '"+req.body.status+"'"+" WHERE cod_parametro_forma_pagamento="+req.params.cod+";");
         }
         
         return res.json('Parametros Forma Pagamento atualizados com sucesso!');
@@ -34,7 +34,7 @@ exports.ParametroFormaPagamento = {
     async parametroFormasPagamento(req, res) {
 
         const parametroFormaPagamento = await db.query("SELECT cod_parametro_forma_pagamento, descricao FROM parametro_forma_pagamento WHERE status = 0");
-        return res.json(parametroFormaPagamento)
+        return res.json(parametroFormaPagamento.rows)
 
     }
 

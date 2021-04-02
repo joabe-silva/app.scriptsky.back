@@ -10,14 +10,14 @@ exports.Init = {
         const parametro_forma_pagamento = "CREATE TABLE parametro_forma_pagamento (cod_parametro_forma_pagamento serial not null, descricao character(200), status integer)"
         const entidade                  = "CREATE TABLE entidade (cod_entidade serial not null, nome character(50), contato character(14), email character(30), senha character(100), situacao integer, tipo integer)"
         const entidade_end              = "CREATE TABLE entidade_end (cod_endereco serial not null, cod_entidade integer, endereco character(50), numero integer, complemento character(30), bairro character(50), cep character(9), cidade character(40), estado character(2))"
-        const pedido                    = "CREATE TABLE pedido (cod_pedido serial not null, cod_entidade integer, valor_total real, desconto real, valor_liquido real, data_criacao timestamp not null default current_timestamp, cod_parametro_forma_pagamento integer, situacao integer)"
+        const pedido                    = "CREATE TABLE pedido (cod_pedido serial not null, cod_entidade integer, valor_total real, desconto real, valor_liquido real, troco real, data_criacao timestamp not null default current_timestamp, cod_parametro_forma_pagamento integer, situacao integer)"
         const pedido_item               = "CREATE TABLE pedido_item (cod_pedido_item serial not null, cod_pedido integer, cod_produto integer, preco real, desconto real, quantidade integer, valor_total real, valor_liquido real, observacao character(100))"
         const produto                   = "CREATE TABLE produto (cod_produto serial not null, cod_produto_grupo integer, imagem character(60), titulo character(80), descricao character(100), preco real, desconto real, situacao integer)"
         const produto_grupo             = "CREATE TABLE produto_grupo (cod_produto_grupo serial not null, descricao character(80))"
 
         //db.query(blacklist);               //Cria tabela blacklist
         //db.query(parametro);               //Cria tabela parametros
-        db.query(parametro_forma_pagamento); //Cria tabela parametro_forma_pagamento
+        //db.query(parametro_forma_pagamento); //Cria tabela parametro_forma_pagamento
         //db.query(entidade);                //Cria tabela entidade
         //db.query(entidade_end);            //Cria tabela entidade_end
         db.query(pedido);                  //Cria tabela pedido

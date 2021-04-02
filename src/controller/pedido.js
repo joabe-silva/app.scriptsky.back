@@ -5,7 +5,7 @@ exports.Pedido = {
     //Cria Pedido
     async criarPedido(req, res) {
 
-        const pedido = "INSERT INTO pedido (cod_entidade, valor_total, desconto, valor_liquido, situacao) values ('"+req.body.cod_entidade+"', '"+req.body.valor_total+"', '"+req.body.desconto+"', '"+req.body.valor_liquido+"', '"+req.body.situacao+"');"
+        const pedido = "INSERT INTO pedido (cod_entidade, valor_total, desconto, valor_liquido, troco, cod_parametro_forma_pagamento, situacao) values ('"+req.body.cod_entidade+"', '"+req.body.valor_total+"', '"+req.body.desconto+"', '"+req.body.valor_liquido+"', '"+req.body.troco+"', '"+req.body.cod_parametro_forma_pagamento+"','"+req.body.situacao+"');"
         db.query(pedido);
 
         const cons_pedido = "SELECT cod_pedido FROM pedido WHERE cod_entidade = '"+req.body.cod_entidade+"' ORDER BY cod_pedido DESC LIMIT 1"

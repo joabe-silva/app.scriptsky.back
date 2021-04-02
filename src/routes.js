@@ -29,7 +29,7 @@ routes.get('/parametro', login.Login.verificaJWT, parametro.Parametro.parametro)
 
 //Rotas Parametro Forma Pagamento
 routes.post('/cadastro-parametro-forma-pagamento', login.Login.verificaJWT, parametro_forma_pagamento.ParametroFormaPagamento.cadastroParametroFormaPagamento)
-routes.put('/editar-parametro-forma-pagamento', login.Login.verificaJWT, parametro_forma_pagamento.ParametroFormaPagamento.editarParametroFormaPagamento)
+routes.put('/editar-parametro-forma-pagamento/:cod', login.Login.verificaJWT, parametro_forma_pagamento.ParametroFormaPagamento.editarParametroFormaPagamento)
 routes.get('/parametro-formas-pagamento', parametro_forma_pagamento.ParametroFormaPagamento.parametroFormasPagamento)
 
 //Rotas Entidade
