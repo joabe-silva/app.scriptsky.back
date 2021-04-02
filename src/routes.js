@@ -25,7 +25,7 @@ routes.post('/logoff', login.Login.logoff)
 //Rotas Parametro
 routes.post('/cadastro-parametro', login.Login.verificaJWT, parametro.Parametro.cadastroParametro)
 routes.put('/editar-parametro', login.Login.verificaJWT, parametro.Parametro.editarParametro)
-routes.get('/parametro', login.Login.verificaJWT, parametro.Parametro.parametro)
+routes.get('/parametro', parametro.Parametro.parametro)
 
 //Rotas Parametro Forma Pagamento
 routes.post('/cadastro-parametro-forma-pagamento', login.Login.verificaJWT, parametro_forma_pagamento.ParametroFormaPagamento.cadastroParametroFormaPagamento)
