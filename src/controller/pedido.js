@@ -11,7 +11,7 @@ exports.Pedido = {
         const cons_pedido = "SELECT cod_pedido FROM pedido WHERE cod_entidade = '"+req.body.cod_entidade+"' ORDER BY cod_pedido DESC LIMIT 1"
         const cod_pedido = await db.query(cons_pedido);
 
-        return res.json(cod_pedido.rows[0].cod_pedido);
+        return res.json(cod_pedido);
 
     },
     //Edita Pedido
