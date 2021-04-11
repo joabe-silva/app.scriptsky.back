@@ -17,7 +17,7 @@ exports.PedidoItem = {
         const pedido_item = "SELECT * FROM pedido_item WHERE cod_pedido="+req.params.cod+";"
         const ped = await db.query(pedido_item);
 
-        return res.json(ped.rows);
+        return res.json(ped);
 
     }
 
