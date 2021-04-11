@@ -5,7 +5,7 @@ exports.Pedido = {
     //Cria Pedido
     async criarPedido(req, res) {
 
-        const pedido = "INSERT INTO pedido (cod_entidade, valor_total, desconto, valor_liquido, troco, cod_parametro_forma_pagamento, situacao) values ('"+req.body.cod_entidade+"', '"+req.body.valor_total+"', '"+req.body.desconto+"', '"+req.body.valor_liquido+"', '"+req.body.troco+"', '"+req.body.cod_parametro_forma_pagamento+"','"+req.body.situacao+"'); SELECT currval(pg_get_serial_sequence('pedido','cod_pedido'));"
+        const pedido = "INSERT INTO pedido (cod_entidade, valor_total, desconto, valor_liquido, troco, cod_parametro_forma_pagamento, retirada_local, situacao) values ('"+req.body.cod_entidade+"', '"+req.body.valor_total+"', '"+req.body.desconto+"', '"+req.body.valor_liquido+"', '"+req.body.troco+"', '"+req.body.cod_parametro_forma_pagamento+"', '"+req.body.retirada_local+"', '"+req.body.situacao+"'); SELECT currval(pg_get_serial_sequence('pedido','cod_pedido'));"
         const ret = await db.query(pedido);
 
         return res.json(ret);
