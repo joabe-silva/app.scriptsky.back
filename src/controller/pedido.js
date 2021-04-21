@@ -47,7 +47,7 @@ exports.Pedido = {
     //Retorna Todos os Pedidos de um Cliente Especifico
     async pedidosEntidade(req, res) {
 
-        const pedido = "SELECT * FROM pedido WHERE cod_entidade="+req.params.cod+" ORDER BY data_criacao DESC"
+        const pedido = "SELECT ped.cod_pedido, ped.valor_total, TO_CHAR(ped.data_criacao, 'DD/MM/YYYY') AS data_criacao, pfp.descricao AS forma_pagamento, CASE ped.situacao WHEN 0 THEN 'Pendente' WHEN 1 THEN 'Em andamento' WHEN 2 THEN 'Concluido' END AS situacao FROM pedido ped INNER JOIN parametro_forma_pagamento pfp ON pfp.cod_parametro_forma_pagamento = ped.cod_parametro_forma_pagamento WHERE cod_entidade="+req.params.cod+" ORDER BY data_criacao DESC"
         const ped = await db.query(pedido);
 
         return res.json(ped.rows);
