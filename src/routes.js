@@ -40,7 +40,7 @@ routes.get('/entidade/:cod', login.Login.verificaJWT, entidade.Entidade.entidade
 routes.get('/entidades', login.Login.verificaJWT, entidade.Entidade.entidades)
 
 //Rotas Endereco Entidade
-routes.post('/cadastro-endereco-entidade', login.Login.verificaJWT, entidadeEndereco.EnderecoEntidade.cadastroEnderecoEntidade)
+routes.post('/cadastro-endereco-entidade', entidadeEndereco.EnderecoEntidade.cadastroEnderecoEntidade)
 routes.put('/editar-endereco-entidade/:cod', login.Login.verificaJWT, entidadeEndereco.EnderecoEntidade.editarEnderecoEntidade)
 routes.get('/endereco-entidade/:cod', login.Login.verificaJWT, entidadeEndereco.EnderecoEntidade.enderecoEntidade)
 
