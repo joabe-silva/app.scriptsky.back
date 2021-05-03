@@ -42,8 +42,8 @@ exports.Entidade = {
         }
 
     },
-    //Edita entidade
-    async editarEntidade(req, res) {
+    //Edita entidade Funcionario
+    async editarEntidadeFuncionario(req, res) {
         
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de 
         const entidade = "SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";"
@@ -90,6 +90,47 @@ exports.Entidade = {
             const entidade = "UPDATE entidade SET tipo = '"+req.body.tipo+"' WHERE cod_entidade = "+req.params.cod+";"
             db.query(entidade);
             
+        }
+        
+        return res.json('Dados da entidade atualizados com sucesso!');
+        
+    },
+    //Edita entidade Cliente
+    async editarEntidadeCliente(req, res) {
+        
+        //Criando validação de campos que foram alterados na view e que devem ser alterados na base de 
+        const entidade = "SELECT * FROM entidade WHERE cod_entidade="+req.params.cod+";"
+        var ret = await db.query(entidade);
+    
+        //Nome
+        if(ret.rows[0].nome.trim() !== req.body.nome.trim()) {
+
+            const entidade = "UPDATE entidade SET nome = '"+req.body.nome.trim()+"' WHERE cod_entidade = "+req.params.cod+";"
+            db.query(entidade);
+
+        }
+        //Contato
+        if(ret.rows[0].contato.trim() !== req.body.contato.trim()) {
+            
+            const entidade = "UPDATE entidade SET contato = '"+req.body.contato.trim()+"' WHERE cod_entidade = "+req.params.cod+";"
+            db.query(entidade);
+
+        }
+        //Email
+        if(ret.rows[0].email.trim() !== req.body.email.trim()) {
+
+            const entidade = "UPDATE entidade SET email = '"+req.body.email.trim()+"' WHERE cod_entidade = "+req.params.cod+";"
+            db.query(entidade);
+
+        }
+        //Senha
+        if(req.body.senha.trim() !== ret.rows[0].senha.trim()) {
+            if(!bcrypt.compareSync(req.body.senha.trim(), ret.rows[0].senha.trim())) {
+
+                const entidade = "UPDATE entidade SET senha = '"+bcrypt.hashSync(req.body.senha, 8)+"' WHERE cod_entidade = "+req.params.cod+";"
+                db.query(entidade);
+    
+            }
         }
         
         return res.json('Dados da entidade atualizados com sucesso!');

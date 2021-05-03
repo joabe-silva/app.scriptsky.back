@@ -35,7 +35,8 @@ routes.get('/parametro-formas-pagamento', parametro_forma_pagamento.ParametroFor
 //Rotas Entidade
 routes.post('/cadastro-entidade-cliente', entidade.Entidade.cadastroEntidadeCliente)
 routes.post('/cadastro-entidade-funcionario', login.Login.verificaJWT, entidade.Entidade.cadastroEntidadeFuncionario)
-routes.put('/editar-entidade/:cod', login.Login.verificaJWT, entidade.Entidade.editarEntidade)
+routes.put('/editar-entidade-funcionario/:cod', login.Login.verificaJWT, entidade.Entidade.editarEntidadeFuncionario)
+routes.put('/editar-entidade-cliente/:cod', login.Login.verificaJWT, entidade.Entidade.editarEntidadeCliente)
 routes.get('/entidade/:cod', login.Login.verificaJWT, entidade.Entidade.entidade)
 routes.get('/entidades', login.Login.verificaJWT, entidade.Entidade.entidades)
 
