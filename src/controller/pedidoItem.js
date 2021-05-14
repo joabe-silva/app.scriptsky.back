@@ -14,7 +14,7 @@ exports.PedidoItem = {
     //Retorna todos os Itens do Pedido
     async pedidoItens(req, res) {
 
-        const pedido_item = "SELECT * FROM pedido_item WHERE cod_pedido="+req.params.cod+";"
+        const pedido_item = "SELECT prod.cod_produto, prod.imagem, prod.titulo, prod.cod_produto_grupo, pedi.preco, pedi.quantidade, pedi.valor_total, pedi.observacao FROM pedido_item pedi INNER JOIN produto prod ON prod.cod_produto = pedi.cod_produto WHERE cod_pedido="+req.params.cod+" ORDER BY prod.titulo;"
         const ped = await db.query(pedido_item);
 
         return res.json(ped);
