@@ -15,15 +15,15 @@ exports.Init = {
         const produto                   = "CREATE TABLE produto (cod_produto serial not null, cod_produto_grupo integer, imagem character(60), titulo character(80), descricao character(100), preco real, desconto real, situacao integer)"
         const produto_grupo             = "CREATE TABLE produto_grupo (cod_produto_grupo serial not null, descricao character(80))"
 
-        //db.query(blacklist);               //Cria tabela blacklist
-        db.query(parametro);               //Cria tabela parametros
-        //db.query(parametro_forma_pagamento); //Cria tabela parametro_forma_pagamento
-        //db.query(entidade);                //Cria tabela entidade
-        //db.query(entidade_end);            //Cria tabela entidade_end
-        //db.query(pedido);                  //Cria tabela pedido
-        //db.query(pedido_item);             //Cria tabela pedido_item
-        //db.query(produto);                 //Cria tabela produto
-        //db.query(produto_grupo);           //Cria tabela produto_grupo
+        db.query(blacklist);                 //Cria tabela blacklist
+        db.query(parametro);                 //Cria tabela parametros
+        db.query(parametro_forma_pagamento); //Cria tabela parametro_forma_pagamento
+        db.query(entidade);                  //Cria tabela entidade
+        db.query(entidade_end);              //Cria tabela entidade_end
+        db.query(pedido);                    //Cria tabela pedido
+        db.query(pedido_item);               //Cria tabela pedido_item
+        db.query(produto);                   //Cria tabela produto
+        db.query(produto_grupo);             //Cria tabela produto_grupo
 
         return res.json('Tabelas criadas com sucesso!');
 
