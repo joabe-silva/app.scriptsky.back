@@ -2,7 +2,7 @@ const express = require('express');
 const routes = express.Router();
 
 const login                     = require('./controller/login');
-//const init                      = require('./controller/init');
+//const init                    = require('./controller/init');
 const parametro                 = require('./controller/parametro');
 const parametro_forma_pagamento = require('./controller/parametro_forma_pagamento');
 const entidade                  = require('./controller/entidade');

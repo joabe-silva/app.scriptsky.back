@@ -5,7 +5,7 @@ exports.Parametro = {
     //Cria Parametro
     async cadastroParametro(req, res) {
  
-        const parametro = "INSERT INTO parametro (imagem_loja, titulo_loja, descricao_loja, contato_loja, endereco_loja, numero_loja, complemento_loja, cep_loja, pedido_minimo_loja, frete, horario_ini_funcionamento_loja, horario_fim_funcionamento_loja, funcionamento_semana_seg, funcionamento_semana_ter, funcionamento_semana_qua, funcionamento_semana_qui, funcionamento_semana_sex, funcionamento_semana_sab, funcionamento_semana_dom, url_storage, url_complet) VALUES ('"+req.body.imagem_loja+"', '"+req.body.titulo_loja+"', '"+req.body.descricao_loja+"', '"+req.body.contato_loja+"', '"+req.body.endereco_loja+"', '"+req.body.numero_loja+"', '"+req.body.complemento_loja+"', '"+req.body.cep_loja+"', '"+req.body.pedido_minimo_loja+"', '"+req.body.frete+"', '"+req.body.horario_ini_funcionamento_loja+"', '"+req.body.horario_fim_funcionamento_loja+"', '"+req.body.funcionamento_semana_seg+"', '"+req.body.funcionamento_semana_ter+"', '"+req.body.funcionamento_semana_qua+"', '"+req.body.funcionamento_semana_qui+"', '"+req.body.funcionamento_semana_sex+"', '"+req.body.funcionamento_semana_sab+"', '"+req.body.funcionamento_semana_dom+"', '"+req.body.url_storage+"', '"+req.body.url_complet+"'"+");"
+        const parametro = "INSERT INTO parametro (imagem_01_loja, imagem_02_loja, titulo_loja, descricao_loja, contato_loja, endereco_loja, numero_loja, complemento_loja, cep_loja, pedido_minimo_loja, frete, horario_ini_funcionamento_loja, horario_fim_funcionamento_loja, funcionamento_semana_seg, funcionamento_semana_ter, funcionamento_semana_qua, funcionamento_semana_qui, funcionamento_semana_sex, funcionamento_semana_sab, funcionamento_semana_dom, url_storage, url_complet) VALUES ('"+req.body.imagem_01_loja+"', '"+req.body.imagem_02_loja+"', '"+req.body.titulo_loja+"', '"+req.body.descricao_loja+"', '"+req.body.contato_loja+"', '"+req.body.endereco_loja+"', '"+req.body.numero_loja+"', '"+req.body.complemento_loja+"', '"+req.body.cep_loja+"', '"+req.body.pedido_minimo_loja+"', '"+req.body.frete+"', '"+req.body.horario_ini_funcionamento_loja+"', '"+req.body.horario_fim_funcionamento_loja+"', '"+req.body.funcionamento_semana_seg+"', '"+req.body.funcionamento_semana_ter+"', '"+req.body.funcionamento_semana_qua+"', '"+req.body.funcionamento_semana_qui+"', '"+req.body.funcionamento_semana_sex+"', '"+req.body.funcionamento_semana_sab+"', '"+req.body.funcionamento_semana_dom+"', '"+req.body.url_storage+"', '"+req.body.url_complet+"'"+");"
         db.query(parametro);
         
         return res.json('Parametros cadastrados com sucesso!');
@@ -17,9 +17,13 @@ exports.Parametro = {
         //Criando validação de campos que foram alterados na view e que devem ser alterados na base de dados
         var ret = await db.query("SELECT * FROM parametro");
         
-        //Imagem 
-        if(ret.rows[0].imagem_loja.trim() !== req.body.imagem_loja.trim()) {
-            db.query("UPDATE parametro SET imagem_loja = '"+req.body.imagem_loja.trim()+"'");
+        //Imagem 01
+        if(ret.rows[0].imagem_01_loja.trim() !== req.body.imagem_01_loja.trim()) {
+            db.query("UPDATE parametro SET imagem_01_loja = '"+req.body.imagem_01_loja.trim()+"'");
+        }
+        //Imagem 02
+        if(ret.rows[0].imagem_02_loja.trim() !== req.body.imagem_02_loja.trim()) {
+            db.query("UPDATE parametro SET imagem_02_loja = '"+req.body.imagem_02_loja.trim()+"'");
         }
         //Titulo
         if(ret.rows[0].titulo_loja.trim() !== req.body.titulo_loja.trim()) {
