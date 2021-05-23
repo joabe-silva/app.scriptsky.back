@@ -18,12 +18,21 @@ exports.Parametro = {
         var ret = await db.query("SELECT * FROM parametro");
         
         //Imagem 01
-        if(ret.rows[0].imagem_01_loja.trim() !== req.body.imagem_01_loja.trim()) {
+        if(ret.rows[0].imagem_01_loja === null | ret.rows[0].imagem_01_loja === undefined){
             db.query("UPDATE parametro SET imagem_01_loja = '"+req.body.imagem_01_loja.trim()+"'");
+        } else {
+            if(ret.rows[0].imagem_01_loja.trim() !== req.body.imagem_01_loja.trim()) {
+                db.query("UPDATE parametro SET imagem_01_loja = '"+req.body.imagem_01_loja.trim()+"'");
+            }
         }
+        
         //Imagem 02
-        if(ret.rows[0].imagem_02_loja.trim() !== req.body.imagem_02_loja.trim()) {
+        if(ret.rows[0].imagem_02_loja === null | ret.rows[0].imagem_02_loja === undefined){
             db.query("UPDATE parametro SET imagem_02_loja = '"+req.body.imagem_02_loja.trim()+"'");
+        } else {
+            if(ret.rows[0].imagem_02_loja.trim() !== req.body.imagem_02_loja.trim()) {
+                db.query("UPDATE parametro SET imagem_02_loja = '"+req.body.imagem_02_loja.trim()+"'");
+            }
         }
         //Titulo
         if(ret.rows[0].titulo_loja.trim() !== req.body.titulo_loja.trim()) {
