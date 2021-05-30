@@ -33,7 +33,7 @@ exports.Grupo = {
     async grupos(req, res) {
 
         const grupos = await db.query("SELECT * FROM produto_grupo ORDER BY descricao ASC");
-        return res.json(grupos.rows);
+        return res.json(grupos);
 
     }
   

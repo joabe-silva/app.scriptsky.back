@@ -122,7 +122,7 @@ exports.Parametro = {
     //Retorna todos os Parametros
     async parametro(req, res) {
 
-        const parametro = await db.query("SELECT * FROM parametro");
+        const parametro = await db.query("SELECT cod_parametro, TRIM(imagem_01_loja) AS imagem_01_loja, TRIM(imagem_02_loja) AS imagem_02_loja, TRIM(titulo_loja) AS titulo_loja, TRIM(descricao_loja) AS descricao_loja, TRIM(contato_loja) AS contato_loja, TRIM(endereco_loja) AS endereco_loja, numero_loja, TRIM(complemento_loja) AS complemento_loja, TRIM(cep_loja) AS cep_loja, pedido_minimo_loja, frete, horario_ini_funcionamento_loja, horario_fim_funcionamento_loja, funcionamento_semana_seg, funcionamento_semana_ter, funcionamento_semana_qua, funcionamento_semana_qui, funcionamento_semana_sex, funcionamento_semana_sab, funcionamento_semana_dom, TRIM(url_storage) AS url_storage, TRIM(url_complet) AS url_complet FROM parametro;");
         return res.json(parametro.rows)
 
     }

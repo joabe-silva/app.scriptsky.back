@@ -53,10 +53,17 @@ exports.Produto = {
         return res.json(prod.rows);
 
     },
-    //Retorna Todos os Pedidos
+    //Retorna Todos os Produtos
     async produtos(req, res) {
 
         const prod = await db.query("SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco FROM produto WHERE situacao = 0 ORDER BY titulo ASC");
+        return res.json(prod);
+
+    },
+    //Retorna Todos os Produtos de Um Certo Grupo de Produtos
+    async produtosGrupo(req, res) {
+
+        const prod = await db.query("SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco FROM produto WHERE cod_produto_grupo ="+req.params.cod_produto_grupo+" ORDER BY descricao ASC");
         return res.json(prod);
 
     }
