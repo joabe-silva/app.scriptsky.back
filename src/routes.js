@@ -62,6 +62,7 @@ routes.put('/editar-produto/:cod', login.Login.verificaJWT, produto.Produto.edit
 routes.get('/produtos-grupo/:cod_produto_grupo', produto.Produto.produtosGrupo)
 routes.get('/produto/:cod', produto.Produto.produto)
 routes.get('/produtos', produto.Produto.produtos)
+routes.post('/produto-pesquisa-por-titulo', produto.Produto.produtoPesquisaPorTitulo)
 
 //Rotas Produto Grupo
 routes.post('/cadastro-produto-grupo', login.Login.verificaJWT, produtoGrupo.Grupo.cadastroProdutoGrupo)

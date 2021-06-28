@@ -66,6 +66,17 @@ exports.Produto = {
         const prod = await db.query("SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco FROM produto WHERE cod_produto_grupo ="+req.params.cod_produto_grupo+" ORDER BY descricao ASC");
         return res.json(prod);
 
-    }
+    },
+    //Retorna Todos os Produtos Que Tenha os Caracteres do Titulo Parecidos Com os Caracteres Enviados na Request
+    async produtoPesquisaPorTitulo(req, res) {
+
+        if(req.body.titulo !== '') {
+            const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco FROM produto WHERE titulo LIKE '%${ req.body.titulo }%' AND situacao = 0 ORDER BY titulo ASC`);
+            return res.json(prod);
+        } else {
+            return res.json('Informe o titulo do produto que procura.');
+        }
+        
+    },
   
 };
