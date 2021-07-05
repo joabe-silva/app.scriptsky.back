@@ -67,12 +67,12 @@ exports.Produto = {
     //Retorna Todos os Produtos de Um Certo Grupo de Produtos
     async produtosGrupo(req, res) {
 
-        if(req.query.situacao != 0 || req.query.situacao != 1) {
-            const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE cod_produto_grupo ='${ req.params.cod_produto_grupo }' ORDER BY titulo ASC`);
-            return res.json(prod);
-        } else {
+        if(req.query.situacao === '1' || req.query.situacao === '0') {
             const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE cod_produto_grupo ='${ req.params.cod_produto_grupo }' AND situacao ='${ req.query.situacao }' ORDER BY titulo ASC`);
-            return res.json(prod);
+            return res.json(prod);      
+        } else {
+            const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE cod_produto_grupo ='${ req.params.cod_produto_grupo }' ORDER BY titulo ASC`);
+            return res.json(prod);         
         }  
 
     },
