@@ -60,7 +60,7 @@ routes.get('/pedido-itens/:cod', login.Login.verificaJWT, pedidoItem.PedidoItem.
 routes.post('/cadastro-produto', login.Login.verificaJWT, produto.Produto.cadastroProduto)
 routes.put('/editar-produto/:cod', login.Login.verificaJWT, produto.Produto.editarProduto)
 routes.delete('/deleta-produto/:cod', login.Login.verificaJWT, produto.Produto.deletaProduto)
-routes.get('/produtos-grupo/:cod_produto_grupo', produto.Produto.produtosGrupo)
+routes.get('/produtos-grupo/:cod', produto.Produto.produtosGrupo)
 routes.get('/produto/:cod', produto.Produto.produto)
 routes.get('/produtos', produto.Produto.produtos)
 routes.get('/produto-pesquisa-por-titulo/:titulo', produto.Produto.produtoPesquisaPorTitulo)
@@ -68,8 +68,10 @@ routes.get('/produto-pesquisa-por-titulo/:titulo', produto.Produto.produtoPesqui
 //Rotas Produto Grupo
 routes.post('/cadastro-produto-grupo', login.Login.verificaJWT, produtoGrupo.Grupo.cadastroProdutoGrupo)
 routes.put('/editar-produto-grupo/:cod', login.Login.verificaJWT, produtoGrupo.Grupo.editarProdutoGrupo)
+routes.delete('/deleta-produto-grupo/:cod', login.Login.verificaJWT, produtoGrupo.Grupo.deletaGrupo)
 routes.get('/grupo/:cod', produtoGrupo.Grupo.grupo)
 routes.get('/grupos', produtoGrupo.Grupo.grupos)
+routes.get('/grupo-pesquisa-por-titulo/:titulo', produtoGrupo.Grupo.GrupoPesquisaPorTitulo)
 
 module.exports = routes;
 

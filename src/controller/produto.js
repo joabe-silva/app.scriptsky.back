@@ -60,7 +60,7 @@ exports.Produto = {
     //Retorna Todos os Produtos
     async produtos(req, res) {
 
-        const prod = await db.query("SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE situacao = 0 ORDER BY titulo ASC");
+        const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE situacao = 0 ORDER BY titulo ASC`);
         return res.json(prod);
 
     },
@@ -68,10 +68,10 @@ exports.Produto = {
     async produtosGrupo(req, res) {
 
         if(req.query.situacao === '1' || req.query.situacao === '0') {
-            const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE cod_produto_grupo ='${ req.params.cod_produto_grupo }' AND situacao ='${ req.query.situacao }' ORDER BY titulo ASC`);
+            const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE cod_produto_grupo ='${ req.params.cod }' AND situacao ='${ req.query.situacao }' ORDER BY titulo ASC`);
             return res.json(prod);      
         } else {
-            const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE cod_produto_grupo ='${ req.params.cod_produto_grupo }' ORDER BY titulo ASC`);
+            const prod = await db.query(`SELECT cod_produto, cod_produto_grupo, TRIM(imagem) AS imagem, TRIM(titulo) AS titulo, descricao, preco, CASE WHEN situacao = 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao FROM produto WHERE cod_produto_grupo ='${ req.params.cod }' ORDER BY titulo ASC`);
             return res.json(prod);         
         }  
 
