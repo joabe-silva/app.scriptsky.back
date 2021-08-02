@@ -49,7 +49,7 @@ routes.get('/endereco-entidade/:cod', login.Login.verificaJWT, entidadeEndereco.
 routes.post('/criar-pedido', login.Login.verificaJWT, pedido.Pedido.criarPedido)
 routes.put('/editar-pedido/:cod', login.Login.verificaJWT, pedido.Pedido.editarPedido)
 routes.get('/pedido/:cod', login.Login.verificaJWT, pedido.Pedido.pedido)
-routes.get('/pedidos', login.Login.verificaJWT, pedido.Pedido.pedidos)
+routes.get('/pedidos/:cod', login.Login.verificaJWT, pedido.Pedido.pedidos)
 routes.get('/pedidos-entidade/:cod', login.Login.verificaJWT, pedido.Pedido.pedidosEntidade)
 
 //Rotas Pedido Item
