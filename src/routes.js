@@ -2,7 +2,7 @@ const express = require('express');
 const routes = express.Router();
 
 const login                     = require('./controller/login');
-//const init                    = require('./controller/init');
+const init                    = require('./controller/init');
 const parametro                 = require('./controller/parametro');
 const parametro_forma_pagamento = require('./controller/parametro_forma_pagamento');
 const entidade                  = require('./controller/entidade');
@@ -13,7 +13,7 @@ const produto                   = require('./controller/produto');
 const produtoGrupo              = require('./controller/produtoGrupo');
 
 //Cria todas as tabelas do banco de dados
-//routes.post('/init-create-tables', init.Init.createTables)
+routes.post('/init-create-tables', init.Init.createTables)
 //Deleta todas as tabelas do banco de dados
 //routes.post('/init-drop-tables', init.Init.dropTables)
 

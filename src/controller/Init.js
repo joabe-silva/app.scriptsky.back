@@ -13,17 +13,17 @@ exports.Init = {
         //const pedido                    = "CREATE TABLE pedido (cod_pedido serial not null, cod_entidade integer, valor_total real, desconto real, valor_liquido real, troco real, data_criacao timestamp not null default current_timestamp, cod_parametro_forma_pagamento integer, retirada_local boolean, observacao character(30), situacao integer)"
         //const pedido_item               = "CREATE TABLE pedido_item (cod_pedido_item serial not null, cod_pedido integer, cod_produto integer, preco real, desconto real, quantidade integer, valor_total real, valor_liquido real, observacao character(100))"
         //const produto                   = "CREATE TABLE produto (cod_produto serial not null, cod_produto_grupo integer, imagem character(60), titulo character(80), descricao character(100), preco real, desconto real, situacao integer)"
-        //const produto_grupo             = "CREATE TABLE produto_grupo (cod_produto_grupo serial not null, sequencia integer, imagem character(60), titulo character(80), descricao character(80))"
+        const produto_grupo             = "CREATE TABLE produto_grupo (cod_produto_grupo serial not null, sequencia integer, imagem character(60), titulo character(80), descricao character(80), situacao integer)"
 
         //db.query(blacklist);                 //Cria tabela blacklist
-        //db.query(parametro);                 //Cria tabela parametros
+        //db.query(parametro);                 //Cria tabela parametro
         //db.query(parametro_forma_pagamento); //Cria tabela parametro_forma_pagamento
         //db.query(entidade);                  //Cria tabela entidade
         //db.query(entidade_end);              //Cria tabela entidade_end
         //db.query(pedido);                    //Cria tabela pedido
         //db.query(pedido_item);               //Cria tabela pedido_item
         //db.query(produto);                   //Cria tabela produto
-        //db.query(produto_grupo);             //Cria tabela produto_grupo
+        db.query(produto_grupo);             //Cria tabela produto_grupo
 
         return res.json('Tabelas criadas com sucesso!');
 
