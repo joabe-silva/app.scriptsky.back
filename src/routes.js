@@ -20,7 +20,7 @@ const produtoGrupo              = require('./controller/produtoGrupo');
 //Login
 routes.post('/login', login.Login.login)
 routes.post('/logoff', login.Login.logoff)
-routes.get('/verifica-token',  login.Login.verificaJWT)
+routes.get('/verifica-token',  login.Login.verificaToken)
 
 //Rotas Parametro
 routes.post('/cadastro-parametro', login.Login.verificaJWT, parametro.Parametro.cadastroParametro)

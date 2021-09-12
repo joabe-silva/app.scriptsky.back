@@ -4,22 +4,42 @@ const jwt    = require('jsonwebtoken');
 require('dotenv').config();
 
 exports.Login = {
-    //Verifica token do usuario
+    //Verifica token
+    async verificaToken(req, res, next) {
+
+        const token = req.headers['x-access-token'];
+
+        const blacklist = `SELECT * FROM blacklist WHERE token='${ token }'`;
+        const ret = await db.query(blacklist);
+
+        //Verifica se o token foi inserido na blacklist. Ou seja o usuario fez logoff utilizando esse token.
+        if(ret.rows === "") {
+            //Verifica se o token ainda esta ativo
+            jwt.verify(token, process.env.SECRET, (error, decoded) => {
+                if(error) {
+                    return res.json('Token invalido! Favor fazer login novamente.');
+                } else {
+                    return res.json('Token valido!');
+                }
+            });
+        } else {
+            res.json('Sua sessão inspirou! Favor fazer login novamente.');
+        }
+
+    },
+    //Verifica JWT das requisições
     async verificaJWT(req, res, next) {
 
         const token = req.headers['x-access-token'];
 
-        const blacklist = "SELECT * FROM blacklist WHERE token='"+token+"'";
-        const ret_blacklist = await db.query(blacklist);
+        const blacklist = `SELECT * FROM blacklist WHERE token='${ token }'`;
+        const ret = await db.query(blacklist);
 
         //Verifica se o token foi inserido na blacklist. Ou seja o usuario fez logoff utilizando esse token.
-        if(ret_blacklist.rows == "") {
+        if(ret.rows === "") {
             //Verifica se o token ainda esta ativo
             jwt.verify(token, process.env.SECRET, (error, decoded) => {
-        
                 if(error) return res.json('Token invalido! Favor fazer login novamente.');
-                const cod_entidade = decoded.cod_entidade;
-        
                 next();
             });
         } else {
