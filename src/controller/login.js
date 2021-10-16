@@ -5,7 +5,7 @@ require('dotenv').config();
 
 exports.Login = {
     //Verifica token
-    async verificaToken(req, res, next) {
+    async verificaToken(req, res) {
 
         const token = req.headers['x-access-token'];
 
@@ -35,7 +35,7 @@ exports.Login = {
         const ret = await db.query(blacklist);
 
         //Verifica se o token foi inserido na blacklist. Ou seja o usuario fez logoff utilizando esse token.
-        if(ret.rows === "") {
+        if(ret.rows.length === 0) {
             //Verifica se o token ainda esta ativo
             jwt.verify(token, process.env.SECRET, (error, decoded) => {
                 if(error) return res.json('Token invalido! Favor fazer login novamente.');
